@@ -11,8 +11,7 @@ export const DisplayNotes = ({ selectedKey, selectedChord, notesArray }) => {
       if (selectedKey === "Key" || selectedChord === "Chord") {
         setChordNotes([]);
         setRootChordNotes([]);
-      }
-      if (notesArray[i].note === selectedKey) {
+      } else if (notesArray[i].note === selectedKey) {
         if (selectedChord === "Major") {
           setChordNotes([
             notesArray[i],
@@ -36,6 +35,7 @@ export const DisplayNotes = ({ selectedKey, selectedChord, notesArray }) => {
               midi: notesArray[i].midi + 7
             }
           ]);
+          //console.log(("root", rootChordNotes));
         } else if (selectedChord === "Minor") {
           setChordNotes([
             notesArray[i],
@@ -228,32 +228,34 @@ export const DisplayNotes = ({ selectedKey, selectedChord, notesArray }) => {
             // notesArray[(i + 11) % notesArray.length],
             // notesArray[(i + 2) % notesArray.length]
           ]);
+          setRootChordNotes([
+            {
+              note: notesArray[(i + 7) % notesArray.length].note,
+              midi: notesArray[i].midi + 7
+            },
+            {
+              note: notesArray[(i + 11) % notesArray.length].note,
+              midi: notesArray[i].midi + 11
+            },
+            {
+              note: notesArray[(i + 14) % notesArray.length].note,
+              midi: notesArray[i].midi + 14
+            }
+            // notesArray[(i + 7) % notesArray.length],
+            // notesArray[(i + 11) % notesArray.length],
+            // notesArray[(i + 2) % notesArray.length]
+          ]);
         }
-        setRootChordNotes([
-          {
-            note: notesArray[(i + 7) % notesArray.length].note,
-            midi: notesArray[i].midi + 7
-          },
-          {
-            note: notesArray[(i + 11) % notesArray.length].note,
-            midi: notesArray[i].midi + 11
-          },
-          {
-            note: notesArray[(i + 14) % notesArray.length].note,
-            midi: notesArray[i].midi + 14
-          }
-          // notesArray[(i + 7) % notesArray.length],
-          // notesArray[(i + 11) % notesArray.length],
-          // notesArray[(i + 2) % notesArray.length]
-        ]);
       }
     }
   }, [notesArray, selectedChord, selectedKey]);
 
   const invertNotes = () => {
+    console.log(chordNotes[0].midi, chordNotes[1].midi, chordNotes[2].midi);
+    console.log(rootChordNotes);
     if (chordNotes[0].midi + 12 > 84) {
-      // console.log("here");
-      // console.log(chordNotes[0].midi + 12);
+      console.log("here");
+      console.log(chordNotes[0].midi + 12);
       setChordNotes(rootChordNotes);
     } else if (chordNotes.length === 3) {
       setChordNotes([
