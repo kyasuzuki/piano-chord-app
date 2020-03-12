@@ -1,0 +1,18 @@
+.ReactPiano__Key--active {
+  background: #f00; /* Change the default active key color to bright red */
+}
+
+.ReactPiano__Key--accidental {
+  background: black; /* Change accidental keys to be completely black */
+}
+
+.ReactPiano__Key--active.ReactPiano__Key--accidental {
+  background: #f00;
+  border: 1px solid black;
+}
+
+.ReactPiano__NoteLabelContainer {
+  flex: 1;
+  /* Align children .ReactPiano__NoteLabel to the bottom of the key */
+  align-self: flex-end;
+}
