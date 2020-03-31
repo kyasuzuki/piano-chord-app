@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { PianoContainer } from "./PianoContainer";
+import { ABCNotation } from "./ABCNotation";
 import { NotesLabel, Spacer } from "./styles";
 
 export const DisplayNotes = ({ selectedKey, selectedChord, notesArray }) => {
@@ -151,9 +152,9 @@ export const DisplayNotes = ({ selectedKey, selectedChord, notesArray }) => {
   }, [notesArray, selectedChord, selectedKey]);
 
   const invertNotes = () => {
-    console.log(chordNotes[0].midi, chordNotes[1].midi, chordNotes[2].midi);
-    console.log(rootChordNotes);
-    if (chordNotes[0].midi + 12 > 84) {
+    //console.log(chordNotes[0].midi, chordNotes[1].midi, chordNotes[2].midi);
+    //console.log(rootChordNotes);
+    if (chordNotes[0].midi + 12 > 83) {
       console.log("here");
       console.log(chordNotes[0].midi + 12);
       setChordNotes(rootChordNotes);
@@ -191,6 +192,7 @@ export const DisplayNotes = ({ selectedKey, selectedChord, notesArray }) => {
       </div>
       <Spacer></Spacer>
       <PianoContainer chordNotes={chordNotes} />
+      <ABCNotation chordNotes={chordNotes} />
     </div>
   );
 };

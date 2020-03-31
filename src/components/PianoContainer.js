@@ -10,7 +10,7 @@ const soundfontHostname = "https://d1pzp51pvbm36p.cloudfront.net";
 export const PianoContainer = ({ chordNotes }) => {
   const noteRange = {
     first: MidiNumbers.fromNote("c3"),
-    last: MidiNumbers.fromNote("c6")
+    last: MidiNumbers.fromNote("b5")
   };
 
   const activeNotes = chordNotes.map(chordNote => chordNote.midi);
