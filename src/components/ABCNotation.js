@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import abcjs from "abcjs";
 import { Notation } from "react-abc";
+import {
+  Box,
+  Button,
+  Text,
+  ResponsiveContext,
+  Grommet,
+  grommet
+} from "grommet";
 
 const notesABCArray = [
   { abc: "C", midi: 48 },
@@ -49,13 +57,7 @@ export const ABCNotation = ({ chordNotes }) => {
     let fullABCString = "";
     for (var i = 0; i < chordNotes.length; i++) {
       for (var j = 0; j < notesABCArray.length; j++) {
-        //console.log("chordNotetMidi", chordNotes[i].midi);
-        //console.log("notesABCArrayMidi", notesABCArray[j].midi);
-        //console.log("chordNotesABC", chordNotesABC);
         if (chordNotes[i].midi === notesABCArray[j].midi) {
-          //   let ABCNote = notesABCArray[j].abc;
-          //   console.log("ABCNote", ABCNote);
-          //setChordNotesABC([...chordNotesABC, notesABCArray[j].abc]);
           let ABCString = notesABCArray[j].abc;
           console.log(ABCString);
           fullABCString += ABCString;
@@ -69,10 +71,9 @@ export const ABCNotation = ({ chordNotes }) => {
     console.log(chordNotesAbc);
   }, [chordNotes]);
 
-  //const notation = "c'";
-  //   return chordNotesABC.map(chordNoteABC => (
-  //     <Notation notation={chordNoteABC} />
-  //   ));
-  // chordNotesABC.join("")
-  return <Notation notation={chordNotesAbc} />;
+  return (
+    <Box>
+      <Notation notation={chordNotesAbc} />
+    </Box>
+  );
 };

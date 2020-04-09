@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { PianoContainer } from "./PianoContainer";
 import { ABCNotation } from "./ABCNotation";
-import { NotesLabel, Spacer } from "./styles";
+import { NotesLabel, Spacer, Grid, Row, Col } from "./styles";
+import {
+  Box,
+  Button,
+  Text,
+  ResponsiveContext,
+  Grommet,
+  grommet
+} from "grommet";
 
 export const DisplayNotes = ({ selectedKey, selectedChord, notesArray }) => {
   const [chordNotes, setChordNotes] = useState([]);
@@ -152,8 +160,6 @@ export const DisplayNotes = ({ selectedKey, selectedChord, notesArray }) => {
   }, [notesArray, selectedChord, selectedKey]);
 
   const invertNotes = () => {
-    //console.log(chordNotes[0].midi, chordNotes[1].midi, chordNotes[2].midi);
-    //console.log(rootChordNotes);
     if (chordNotes[0].midi + 12 > 83) {
       console.log("here");
       console.log(chordNotes[0].midi + 12);
@@ -175,24 +181,53 @@ export const DisplayNotes = ({ selectedKey, selectedChord, notesArray }) => {
   };
 
   return (
-    <div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row"
-        }}
-      >
-        <div style={{ marginRight: "10px" }}>Notes:</div>
-        {chordNotes.map(chordNote => (
-          <div style={{ marginRight: "10px" }}>{chordNote.note}</div>
-        ))}
-        <div>
-          <button onClick={invertNotes}>Invert Notes</button>
-        </div>
-      </div>
-      <Spacer></Spacer>
-      <PianoContainer chordNotes={chordNotes} />
-      <ABCNotation chordNotes={chordNotes} />
-    </div>
+    <ResponsiveContext.Consumer>
+      {size => (
+        <Box>
+          <Box
+            direction="row"
+            pad={size !== "small" ? "large" : "none"}
+            margin={
+              size !== "small" ? { vertical: "none" } : { vertical: "50px" }
+            }
+            justify="center"
+          >
+            <PianoContainer chordNotes={chordNotes} />
+          </Box>
+          <Box direction="row-responsive" justify="center" align="center">
+            <Box>
+              <Box direction="row" margin={{ left: "50px" }}>
+                {chordNotes.map(chordNote => (
+                  <Text size="large" margin={{ right: "20px" }}>
+                    {chordNote.note}
+                  </Text>
+                ))}
+              </Box>
+              <Box width="small" overflow="hidden">
+                <ABCNotation chordNotes={chordNotes} />
+              </Box>
+            </Box>
+            <Box align="start">
+              {chordNotes.length > 0 ? (
+                <Button
+                  primary
+                  onClick={invertNotes}
+                  label="Invert"
+                  color="status-critical"
+                />
+              ) : (
+                <Button
+                  primary
+                  onClick={invertNotes}
+                  label="Invert"
+                  color="status-critical"
+                  style={{ visibility: "hidden" }}
+                />
+              )}
+            </Box>
+          </Box>
+        </Box>
+      )}
+    </ResponsiveContext.Consumer>
   );
 };
