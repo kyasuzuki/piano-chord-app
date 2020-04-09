@@ -57,7 +57,7 @@ const App = () => {
       {size => (
         <Grommet theme={grommet} full>
           <Box flex pad="xlarge" className="App">
-            <Box direction="row" gap="medium" justify="center">
+            <Box direction="row-responsive" gap="medium" justify="center">
               <Select
                 options={[
                   "C",

@@ -184,33 +184,30 @@ export const DisplayNotes = ({ selectedKey, selectedChord, notesArray }) => {
     <ResponsiveContext.Consumer>
       {size => (
         <Box>
-          <Box flex direction="row" pad="large" justify="center">
+          <Box
+            direction="row"
+            pad={size !== "small" ? "large" : "none"}
+            margin={
+              size !== "small" ? { vertical: "none" } : { vertical: "50px" }
+            }
+            justify="center"
+          >
             <PianoContainer chordNotes={chordNotes} />
           </Box>
-          <Box
-            width={size !== "small" ? "40%" : "100%"}
-            direction="row"
-            flex
-            justify="center"
-            align="center"
-          >
-            <Box width="20%">
-              <Box
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  marginLeft: "50px"
-                }}
-              >
+          <Box direction="row-responsive" justify="center" align="center">
+            <Box>
+              <Box direction="row" margin={{ left: "50px" }}>
                 {chordNotes.map(chordNote => (
-                  <Text size="large" style={{ marginRight: "20px" }}>
+                  <Text size="large" margin={{ right: "20px" }}>
                     {chordNote.note}
                   </Text>
                 ))}
               </Box>
-              <ABCNotation chordNotes={chordNotes} />
+              <Box width="small" overflow="hidden">
+                <ABCNotation chordNotes={chordNotes} />
+              </Box>
             </Box>
-            <Box width="20%">
+            <Box align="start">
               {chordNotes.length > 0 ? (
                 <Button
                   primary

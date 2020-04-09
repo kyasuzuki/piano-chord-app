@@ -38,7 +38,7 @@ export const PianoContainer = ({ chordNotes }) => {
           render={({ isLoading, playNote, stopNote }) => (
             <Piano
               noteRange={noteRange}
-              width={600}
+              width={containerWidth}
               playNote={playNote}
               stopNote={stopNote}
               disabled={isLoading}
